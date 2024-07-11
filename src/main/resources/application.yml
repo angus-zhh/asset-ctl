@@ -1,0 +1,46 @@
+server:
+  port: 8080
+mybatis:
+  mapper-locations: classpath:mappers/*xml
+  type-aliases-package: com.ycss.asset.ctl.entity
+spring:
+  application:
+    name: asset-mgt
+  datasource:
+    # 数据源类型设置为Druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 基础属性
+      url: jdbc:mysql://127.0.0.1:3306/dt?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: Admin@123986
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      # 用来检测连接是否有效的SQL
+      validation-query: SELECT 1 FROM DUAL
+      # 配置间隔多久进行一次检测不活动连接，单位是毫秒
+      #      phase-of-pool-check: 60000
+      # 配置监控统计拦截的filters
+      filters: stat,wall
+      # WebStatFilter配置
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+        allow: 127.0.0.1
+        deny: 192.168.1.1
